@@ -58,9 +58,8 @@ function Authentication(options) {
 
   this.baseOptions = options;
 
-  this.baseOptions._sendTelemetry = this.baseOptions._sendTelemetry === false
-    ? this.baseOptions._sendTelemetry
-    : true;
+  this.baseOptions._sendTelemetry =
+    this.baseOptions._sendTelemetry === false ? this.baseOptions._sendTelemetry : true;
 
   this.baseOptions.rootUrl = 'https://' + this.baseOptions.domain;
 
@@ -297,7 +296,7 @@ Authentication.prototype.oauthToken = function(options, cb) {
 
   body.grant_type = body.grant_type;
 
-  return this.request.post(url).send(body).end(responseHandler(cb));
+  return this.request.post(url).withCredentials(false).send(body).end(responseHandler(cb));
 };
 
 /**
