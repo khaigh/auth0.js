@@ -24,7 +24,7 @@ CURR_DATE=`date +%Y-%m-%d`
 IS_VALID_VERSION_LEVEL=false
 VERSION_LEVEL=$1
 
-REPO_URL=$( jq .repository.url package.json | sed 's/\"//g' | sed 's/\.git//g')
+REPO_URL='https://github.com/khaigh/auth0.js.git'
 REPO_NAME=$( basename $REPO_URL )
 TMP_CHANGELOG_FILE="/tmp/$REPO_NAME-TMPCHANGELOG-$RANDOM"
 
@@ -58,7 +58,7 @@ fi
 
 echo "Release process init"
 
-ORIG_VERSION=$(jq .version package.json | sed 's/\"//g')
+ORIG_VERSION=$( node_modules/node-jq/bin/jq .version package.json | sed 's/\"//g')
 ORIG_V_VERSION="v$ORIG_VERSION"
 
 echo "Current version" $ORIG_VERSION
@@ -80,7 +80,7 @@ case "$choice" in
 esac
 
 echo "Updating package.json"
-jq ".version=$QUOTED_NEW_VERSION" package.json > package.json.new
+node_modules/node-jq/bin/jq ".version=$QUOTED_NEW_VERSION" package.json > package.json.new
 
 echo "Generating tmp changelog"
 echo "# Change Log" > $TMP_CHANGELOG_FILE
