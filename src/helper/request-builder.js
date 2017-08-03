@@ -49,8 +49,8 @@ RequestObj.prototype.send = function(body) {
   return this;
 };
 
-RequestObj.prototype.withCredentials = function() {
-  this.request = this.request.withCredentials();
+RequestObj.prototype.withCredentials = function(val) {
+  this.request = this.request.withCredentials(val);
   return this;
 };
 
